@@ -8,8 +8,15 @@ function selectRandomWord(){
     document.querySelector("#letters").addEventListener("click",btnHandler)
 }
 
+function letterHandler(letter){
+    letter = letter.toLowerCase()
+    console.log(letter)
+
+}
+
 function btnHandler(event){
-    console.log(event.target)
+    // console.log(event.target)
+    letterHandler(event.target.innerHTML)
     
 }
 
