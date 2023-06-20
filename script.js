@@ -1,5 +1,5 @@
 const secretWords = ["break","apple","moon","rice","day","night"]
-
+const getImg = document.querySelector("#image img")
 let randomWord=""
 let clicked = []
 let result = ""
@@ -42,11 +42,23 @@ function letterHandler(letter){
         clicked.push(letter)
         underScore()
         checkLive(letter)
+    }else{
+        alert("Clicked")
     }
 
 }
 
 function btnHandler(event){
+    if(lives == 6 || getImg.getAttribute("src")=="assets/winner.png"){
+        document.querySelector("#clue").innerHTML =randomWord
+        setTimeout(function(){
+            if(confirm("Do You Want To Play Again")){
+                location.reload()
+            }
+        },100)
+        
+        return
+    }
     // console.log(event.target)
     letterHandler(event.target.innerHTML)
     event.target.className = "used"
@@ -54,6 +66,16 @@ function btnHandler(event){
 }
 
 function keyHandler(event){
+    if(lives == 6 || getImg.getAttribute("src")=="assets/winner.png"){
+        document.querySelector("#clue").innerHTML =randomWord
+        setTimeout(function(){
+            if(confirm("Do You Want To Play Again")){
+                location.reload()
+            }
+        },100)
+        
+        return
+    }
     letterHandler(event.key)
 }
 
