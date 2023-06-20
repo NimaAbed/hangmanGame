@@ -1,0 +1,1 @@
+const secretWords = ["break","apple","moon","rice","day","night"]
