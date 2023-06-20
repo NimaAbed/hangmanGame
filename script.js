@@ -24,6 +24,10 @@ function underScore(){
 }
 
 function checkLive(letter){
+    if(result == randomWord){
+        document.querySelector("#image img").setAttribute("src",`assets/winner.png`)
+        return
+    }
     if(!(randomWord.includes(letter))){
         lives+=1
         document.querySelector("#image img").setAttribute("src",`assets/hangman${lives}.png`)
