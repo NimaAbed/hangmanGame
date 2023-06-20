@@ -3,6 +3,7 @@ const secretWords = ["break","apple","moon","rice","day","night"]
 let randomWord=""
 let clicked = []
 let result = ""
+let lives = 0
 function selectRandomWord(){
     randomWord=secretWords[Math.floor(Math.random()*secretWords.length)]
     console.log(randomWord)
@@ -22,12 +23,20 @@ function underScore(){
     document.querySelector("#clue").innerHTML=`<p>${result}</p>`
 }
 
+function checkLive(letter){
+    if(!(randomWord.includes(letter))){
+        lives+=1
+        document.querySelector("#image img").setAttribute("src",`assets/hangman${lives}.png`)
+    }
+}
+
 function letterHandler(letter){
     letter = letter.toLowerCase()
     console.log(letter)
     if(clicked.indexOf(letter)==-1){
         clicked.push(letter)
         underScore()
+        checkLive(letter)
     }
 
 }
