@@ -48,6 +48,7 @@ function letterHandler(letter){
 function btnHandler(event){
     // console.log(event.target)
     letterHandler(event.target.innerHTML)
+    event.target.className = "used"
     
 }
 
