@@ -8,6 +8,7 @@ function selectRandomWord(){
     randomWord=secretWords[Math.floor(Math.random()*secretWords.length)]
     console.log(randomWord)
     document.querySelector("#letters").addEventListener("click",btnHandler)
+    window.addEventListener("keydown",keyHandler)
 }
 
 function underScore(){
@@ -50,6 +51,10 @@ function btnHandler(event){
     letterHandler(event.target.innerHTML)
     event.target.className = "used"
     
+}
+
+function keyHandler(event){
+    letterHandler(event.key)
 }
 
 
