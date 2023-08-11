@@ -1,79 +1,76 @@
-const secretWords = ["break","apple","moon","rice","day","night"]
+const secretWords = ["break", "apple", "moon", "rice", "day", "night"]
 const getImg = document.querySelector("#image img")
-let randomWord=""
+let randomWord = ""
 let clicked = []
 let result = ""
 let lives = 0
-function selectRandomWord(){
-    randomWord=secretWords[Math.floor(Math.random()*secretWords.length)]
-    console.log(randomWord)
-    document.querySelector("#letters").addEventListener("click",btnHandler)
-    window.addEventListener("keydown",keyHandler)
+function selectRandomWord() {
+    randomWord = secretWords[Math.floor(Math.random() * secretWords.length)]
+    document.querySelector("#letters").addEventListener("click", btnHandler)
+    window.addEventListener("keydown", keyHandler)
 }
 
-function underScore(){
+function underScore() {
     let splitedWord = randomWord.split("")
-    let mapSplitedWord=splitedWord.map(function(item){
-        if(clicked.includes(item)){
+    let mapSplitedWord = splitedWord.map(function (item) {
+        if (clicked.includes(item)) {
             return item
-        }else{
+        } else {
             return "_"
         }
     })
-    result=mapSplitedWord.join("")
-    document.querySelector("#clue").innerHTML=`<p>${result}</p>`
+    result = mapSplitedWord.join("")
+    document.querySelector("#clue").innerHTML = `<p>${result}</p>`
 }
 
-function checkLive(letter){
-    if(result == randomWord){
-        document.querySelector("#image img").setAttribute("src",`assets/winner.png`)
+function checkLive(letter) {
+    if (result == randomWord) {
+        document.querySelector("#image img").setAttribute("src", `assets/winner.png`)
         return
     }
-    if(!(randomWord.includes(letter))){
-        lives+=1
-        document.querySelector("#image img").setAttribute("src",`assets/hangman${lives}.png`)
+    if (!(randomWord.includes(letter))) {
+        lives += 1
+        document.querySelector("#image img").setAttribute("src", `assets/hangman${lives}.png`)
     }
 }
 
-function letterHandler(letter){
+function letterHandler(letter) {
     letter = letter.toLowerCase()
-    console.log(letter)
-    if(clicked.indexOf(letter)==-1){
+    if (clicked.indexOf(letter) == -1) {
         clicked.push(letter)
         underScore()
         checkLive(letter)
-    }else{
+    } else {
         alert("Clicked")
     }
 
 }
 
-function btnHandler(event){
-    if(lives == 6 || getImg.getAttribute("src")=="assets/winner.png"){
-        document.querySelector("#clue").innerHTML =randomWord
-        setTimeout(function(){
-            if(confirm("Do You Want To Play Again")){
+function btnHandler(event) {
+    if (lives == 6 || getImg.getAttribute("src") == "assets/winner.png") {
+        document.querySelector("#clue").innerHTML = randomWord
+        setTimeout(function () {
+            if (confirm("Do You Want To Play Again")) {
                 location.reload()
             }
-        },100)
-        
+        }, 100)
+
         return
     }
-    // console.log(event.target)
     letterHandler(event.target.innerHTML)
     event.target.className = "used"
-    
+
 }
 
-function keyHandler(event){
-    if(lives == 6 || getImg.getAttribute("src")=="assets/winner.png"){
-        document.querySelector("#clue").innerHTML =randomWord
-        setTimeout(function(){
-            if(confirm("Do You Want To Play Again")){
+function keyHandler(event) {
+    if (lives == 6 || getImg.getAttribute("src") == "assets/winner.png") {
+        document.querySelector("#clue").innerHTML = randomWord
+        setTimeout(function () {
+            if (confirm("Do You Want To Play Again")) {
                 location.reload()
             }
-        },100)
-        
+        }, 100)
+
         return
     }
     letterHandler(event.key)
